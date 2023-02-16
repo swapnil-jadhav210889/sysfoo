@@ -1,1 +1,1 @@
-This is a Sample Maven App. Updating for triggering changes .
+ok This is a Sample Maven App. Updating for triggering changes .
