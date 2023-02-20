@@ -1,30 +1,31 @@
 pipeline {
+  agent {
+    docker {
+      image 'maven:3.9.0-sapmachine-17'
+    }
 
-		agent any
+  }
+  stages {
+    stage('build') {
+      steps {
+        sh 'mvn compile'
+      }
+    }
 
-		tools {
-			maven 'Maven3.9.0'
+    stage('test') {
+      steps {
+        sh 'mvn clean test'
+      }
+    }
 
-			}
-		stages {
-			stage('build') {
-				steps{
-				sh 'mvn compile'
+    stage('package') {
+      steps {
+        sh 'mvn package -DskipTests'
+      }
+    }
 
-			}
-			}	
-			 stage('test') {
-                                steps{
-                                sh 'mvn clean test'
-                        }
-
-			}
-			 stage('package') {
-                                steps{
-                                sh 'mvn package -DskipTests'
-                        }
-
-			}
-
-	}
+  }
+  tools {
+    maven 'Maven3.9.0'
+  }
 }
